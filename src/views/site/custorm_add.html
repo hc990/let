@@ -1,0 +1,80 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<style>
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+</style>
+<script>
+$('#begin_at').datetimepicker({
+  ampm: true	
+});
+
+//请放入公共js库
+$(function(){
+	$.datetimepicker.setDefaults( $.datetimepicker.regional[ "zh-CN" ] );
+    $( "input.datepicker_date" ).datetimepicker( {
+				"dateFormat":'yy-MM-dd hh:mm',
+				"yearRange":'2012:2099',
+				changeMonth: true,
+				changeYear: true,
+				stepMinute:30
+		});	
+	});
+
+</script>
+<%def name="body()">
+<div class="form" style="margin:0 auto 0 auto;width: 300px;">
+
+<form action="/custorm_add" method="post" >
+	<div class="field">
+  <fieldset>
+     <label for="cname" class="label">客户名称:</label>
+			<div class="input">
+				<input type="text" id="cname" name="cname"/>
+			</div>
+			<br>
+    <label for="description" class="label">描述:</label>
+    <div class="input">
+				<input type="text" id="description" name="description"/>
+	</div>
+    <br>	
+   
+	<label for="begin_at" class="label">开始时间：</label>
+     <div class="input">
+		 <input type="date" class="datepicker_date" id="begin_at" name="begin_at"/>	
+    </div>
+    <br>	
+    
+    <label for="begin_at" class="label">结束时间：</label>
+     <div class="input">
+		 <input type="date" class="datepicker_date" id="suspended_at" name="suspended_at"/>	
+    </div>
+    <br>	
+    <label for="type" class="label">产品带宽:</label>
+	<div class="input">
+	     <select id="type" name ="type">
+			 % for i in range(1,21):
+                 <option value=${i} > ${i}</option>  
+             % endfor
+         </select>M(单位：兆)
+    </div>
+			<br>
+	<label for="continue_to" class="label">可用时：</label>
+    <div class="input"><input type="text" id="continue_to" name="continue_to"/>h(单位：小时)
+    </div>
+    <br>
+        <div class="buttons"><input type="reset" class="button"/>
+                             <input type="submit"  class="button" value="添加" />
+        </div>
+  </fieldset>
+</form>
+</div>
+</div>
+</%def>
+
+
+<a href="http://www.jztech.cn" target="new">更多技术支持，欢迎访问君众科技公司网站！</a>   

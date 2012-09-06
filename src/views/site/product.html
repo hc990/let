@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+
+<%! 
+import time
+    %>
+<div id="page-header">
+	<div class="title">
+		运营商管理界面
+	</div>
+	<div class="subtitle">
+	    用户信息
+	</div>
+</div>
+	<div class="field">
+<table>
+			<tbody>
+				<tr>
+				    <th align="center">编号</th>
+					<th align="center">客户名称</th>
+					<th align="center">描述</th>
+					<th align="center">状态</th>
+					<th align="center">产品带宽</th>
+					<th align="center">注册时间</th>
+					<th align="center">操作</th>		
+							
+				</tr>
+			    % for c in custormers:
+				<% i=1 %>
+				
+				<tr>
+				    <td align="center">${i}</td>
+				    <% i=i+1 %>
+					<td>${c['_id']}</td>
+					<td>${c['description']}</td>
+					<td>
+					    % if c['status']==0: 
+					          激活
+					    % else: 
+					          注销
+					    % endif
+					</td>
+					<td align="right" >${c['ctype']}M</td>
+					<% ct = c['created_at'].strftime("%y-%m-%d %H:%M:%S") %>
+					<td>${ct}</td>
+					<td align="center"><input type="button" class="button" value="操作" /></td>
+				</tr>
+		        % endfor
+			</tbody>
+		</table>
+</div>
+<div id="page-content">
+	<div class="body">
+		<a href="http://www.jztech.cn" target="new">更多技术支持，欢迎访问君众科技公司网站！</a>   
+	</div>
+</div>
+
+</%def>

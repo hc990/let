@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/base.html" />
+
+### Template for content pages
+<%def name="body()">
+	<%include file="/shared/flash_messages.html"/>
+	<div id="wrap" role="main">
+		<div id="main">
+			<%include file="/shared/header.html"/>
+			<div id="content">
+				<div id="content-inner">
+				<%def name="body_content()">
+					${next.body()}
+				</%def>
+				${body_content()}
+				</div>
+				<ul>
+				% if is_logged_in :
+				% if current_user['roletype']==2 :
+					<li class="main">
+							<a href="#">运营商</a>
+						<ul>
+							<li>
+								<a href="../manage">查询用户</a>
+							</li>
+							<li>
+								<a href="../custorm_add">添加用户</a>
+							</li>
+							<li>
+								<a href="../pwdchange">密码重置</a>
+							</li>
+							
+						</ul>
+					</li>
+				% elif  current_user['roletype']==3 :
+					<li class="main">
+						<a href="#">用户</a>
+						<ul>
+							<li>
+								<a href="../product">信息查询</a>
+							</li>
+							<li>
+								<a href="../pwdchange">密码重置</a>
+							</li>
+						</ul>
+					</li>
+				% else:
+					<li class="main">
+						<a href="#">系统管理</a>
+						<ul>
+							<li>
+								<a href="../get_admin">管理员管理</a>
+							</li>  
+							<li>
+								<a href="../get_users">运营商管理</a>
+							</li>
+							<li>
+								<a href="../signup">添加角色</a>
+							</li> 
+							<li>
+								<a href="../pwdchange">密码重置</a>
+							</li>
+						</ul>
+					</li>
+				% endif
+				% endif
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<%include file="/shared/footer.html"/>
+</%def>
