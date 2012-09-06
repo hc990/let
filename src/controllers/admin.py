@@ -84,7 +84,7 @@ class SignupHandler(BaseHandler):
             self.redirect("/signup")
             return
         
-        user = User.instance(username, password,int(roletype))
+        user = User.instance(username, password, int(roletype))
         Mongo.db.ui['users'].insert(user)
         self.flash.info = "Successfully created your account, please log in."
         self.redirect("/login")

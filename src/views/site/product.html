@@ -19,6 +19,7 @@ import time
 				<tr>
 				    <th align="center">编号</th>
 					<th align="center">客户名称</th>
+					<th align="center">运营商</th>
 					<th align="center">描述</th>
 					<th align="center">状态</th>
 					<th align="center">产品带宽</th>
@@ -32,7 +33,8 @@ import time
 				<tr>
 				    <td align="center">${i}</td>
 				    <% i=i+1 %>
-					<td>${c['_id']}</td>
+					<td>${c['cname']}</td>
+					<td>${c['yname']}</td>
 					<td>${c['description']}</td>
 					<td>
 					    % if c['status']==0: 

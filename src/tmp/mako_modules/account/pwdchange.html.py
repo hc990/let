@@ -23,7 +23,7 @@ def _mako_generate_namespaces(context):
 def _mako_inherit(template, context):
     _mako_generate_namespaces(context)
     return runtime._inherit_from(context, u'/layouts/content.html', _template_uri)
-def render_body(context,**pageargs):
+def render_body(context, **pageargs):
     context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
