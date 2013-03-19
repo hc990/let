@@ -11,7 +11,7 @@ from core.singleton import Singleton
     Singleton mongo connection
 '''
 class Mongo(Singleton):
-    
+      
     db = None
     
     '''
@@ -32,7 +32,7 @@ class Mongo(Singleton):
     
     '''
         Useage:
-        from whirlwind.db.mongo import Mongo
+        from toolstar.db.mongo import Mongo
         Mongo.create(host='host.com', port='23423', username='mongouser', password='password')
     '''
     @staticmethod

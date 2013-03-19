@@ -16,7 +16,7 @@ class Log():
                 os.makedirs(dirname)
             
             self.destination = 'FILE'
-            self.file_logger = logging.getLogger('whirlwind')
+            self.file_logger = logging.getLogger('toolstar')
             hdlr = logging.FileHandler(log_file)
             hdlr.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(user)s %(message)s %(extended_info)s'))
             self.file_logger.addHandler(hdlr)
@@ -24,6 +24,7 @@ class Log():
         else:
             assert Mongo.db != None, "Logger Exception - you must initialize Mongo first to use DB logging"
             self.destination = 'DB'
+
 
     def message(self, type, message, user='', extended_info=''):
         if self.destination == 'DB':    

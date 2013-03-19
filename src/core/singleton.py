@@ -1,7 +1,7 @@
 '''
 Created on 2012/2/23
 
-@author: ishida
+@author: hwangchong
 '''
 class Singleton(object):
     

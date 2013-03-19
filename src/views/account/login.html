@@ -1,38 +1,65 @@
 # -*- coding: utf-8 -*-
-<%inherit file="/layouts/content.html" />
+<%inherit file="/layouts/base.html" />
 
+### Template for content pages
 <%def name="body()">
-<div class="form" style="margin:0 auto 0 auto;width: 250px;">
-	<div class="title">
-		请登陆
-	</div>
-	<form action="/login" method="post"> 
-		<input type="hidden" name="next" value="${next}" /> 
-		<div class="field">
-			<label for="username" class="label">
-				用户名
-			</label>
-			<div class="input">
-				<input type="text" id="username" name="username"/>
+    <link href="/static/css/jquery.motionCaptcha.0.2.css" rel="stylesheet" />	
+	<style type="text/css">
+		body{background:#231815;/*url(/static/images/bg.jpg);*/ color:#997e54; overflow:hidden; }
+		.row{float:none; clear:both; zoom:1;}
+		.divider{border-bottom:3px dotted #997e54; margin:5px 0;}
+	</style>
+	<form action="/login" method="post" id="login-form"> 	   
+		<input type="hidden" name="next" value="${next}" />
+		<div style="margin-left:auto; margin-right:auto; width:443px; height:238px; margin-top:150px; text-align:center;">
+			<div class="row">
+				<img src="/static/images/logo.gif" alt="logo" style="border:0; display:inline-block; " />
+				<div class="pull-left" style="display:inline-block; vertical-align:middle; ">君众网络管理系统<br />
+					<small style="font-size:10px;">version 1.0.0 beta</small>
+				</div>
 			</div>
-		</div>
-		
-		<div class="field">
-			<label for="password" class="label">
-				密码
-			</label>
-			<div class="input">
-				<input type="password" id="password" name="password"/>
+			<div class="row divider"></div>
+			<div class="row">
+				
+				<div style="float:left; text-align:left;  width:290px; ">
+					<input type="text" id="username" name="username" style="border:0 none; background:url(/static/images/input.png) no-repeat; width:280px; height:35px; padding-left:80px; color:white; margin:5px 0;" />
+					<input type="password" id="password" name="password" style="border:0 none; background:url(/static/images/input_pw.png) no-repeat; width:280px; height:35px; padding-left:80px; color:white;margin:5px 0;" />
+					 <div id="mc">
+					   <canvas id="mc-canvas"></canvas>
+				    </div>
+					<div class="field">
+						<label for="keep_logged_in"><input type="checkbox" name="keep_logged_in" id="keep_logged_in" /> 保持我的登录状态</label>
+					</div> 		  			
+				</div>
+				
+				<div style="float:left; vertical-align:middle; padding:30px 0;">
+				    <input type="hidden" id="mc-action" value="/login" />
+					<input type="image" disabled="disabled" src="/static/images/button.png" value="Login" style="-webkit-filter:grayscale(1);width:115px; height:30px; " />
+				</div>
 			</div>
-		</div>
-		
-		<div class="field">
-			<label for="keep_logged_in"><input type="checkbox" name="keep_logged_in" id="keep_logged_in" /> keep me logged in</label>
-		</div> 
-		
-		<div class="buttons">
-			<input type="submit" value="Login" class="button"   />
 		</div>
 	</form>
-</div>
+	
+
+	<script type="text/javascript" src="/static/js/jquery.motionCaptcha.0.2.js"></script>
+	<script>
+		window.onload = function(){  
+	        try{  
+	            document.createElement('canvas').getContext('2d');            
+	        }catch(e){  
+	            $('input[type="image"]').attr('disabled',false);
+	        }  
+        }; 
+		$('#login-form').motionCaptcha({
+			action: '#mc-action',
+			divId: '#mc',
+			cssClass: '.mc-active',
+			canvasId: '#mc-canvas',
+			shapes: ['triangle', 'x', 'rectangle', 'circle', 'check', 'caret', 'zigzag', 'arrow', 'leftbracket', 'rightbracket', 'v', 'delete', 'star', 'pigtail'],
+			errorMsg: '请重试！',
+			successMsg: 'success!',
+			noCanvasMsg: "你tmd能换个浏览器吗？ - try Chrome, FF4, Safari or IE9.",
+			label: '<p>Please draw the shape in the box to submit the form:</p>'
+		});				
+	</script>
 </%def>

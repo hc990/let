@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+
+<%! 
+import time
+    %>
+<div id="page-header">
+	<div class="title">
+		运营商
+	</div>
+	<div class="subtitle">
+	    信息查询
+	</div>
+</div>
+	<div class="field">
+<table>
+			<tbody>
+				<tr>
+				    <th align="center">编号</th>
+				    <th align="center">运营商名称</th>
+					<th align="center">注册日期</th>
+					<th align="center">登陆次数</th>
+					<th align="center">上次登陆时间</th>
+					<th align="center">操作</th>
+				</tr>
+				<% i=1 %>
+				% for c in users:
+				<tr>
+				    <td align="center">${i}</td>
+				    <% i=i+1 %>
+					<td>${c['_id']}</td>
+					<% ct = c['created_at'].strftime("%y-%m-%d %H:%M:%S") %>
+					<td>${ct}</td>
+					<td>${c['history']['num_logins']}</td>
+					<% 
+					   lt = ''
+					   if c['history']['num_logins'] >0: 
+					      lt = c['history']['last_login'].strftime("%y-%m-%d %H:%M:%S")  
+					   else:
+					      lt = '' 	       
+					   endif
+					 %>
+					 <td>${lt}</td>
+					<td align="center"><input type="button" class="button" value="注销" />  <input type="button" class="button" value="激活" /></td>
+				</tr>
+				% endfor
+			</tbody>
+		</table>
+</div>
+<div id="page-content">
+	<div class="body">
+		<a href="http://www.jztech.cn" target="new">更多技术支持，欢迎访问君众科技公司网站！</a>   
+	</div>
+</div>
+
+</%def>

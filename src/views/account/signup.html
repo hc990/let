@@ -1,52 +1,44 @@
 # -*- coding: utf-8 -*-
 <%inherit file="/layouts/content.html" />
-
 <%def name="body()">
-<div class="form" style="margin:0 auto 0 auto;width: 250px;">
-	<div class="title">
-		注册
+	<div class="box">
+	<div class="box-header">
+		<h1>注册</h1>
 	</div>
+	<div class="box-content">
 	<form action="/signup" method="post"> 
 		<input type="hidden" name="next" value="${next}" /> 
-		<div class="field">
+		<p>
 			<label for="username" class="label">
 				名称：
 			</label>
-			<div class="input">
-				<input type="text" id="username" name="username"/>
-			</div>
-		</div>
-		
-		<div class="field">
+				<input type="text" id="username" name="username" class="required"/>
+		</p>
+		<p>
 			<label for="password" class="label">
 				密码：
 			</label>
-			<div class="input">
-				<input type="password" id="password" name="password"/>
-			</div>
-		</div>
-		<div class="field">
+				<input type="password" id="password" name="password" class="required" /> 
+		</p>
+		<p>
 			<label for="password2" class="label">
 				请再次输入密码：
 			</label>
-			<div class="input">
-				<input type="password" id="password2" name="password2"/>
-			</div>
-		</div>
-		<div class="field">
+				<input type="password" id="password2" name="password2" class="required" />
+		</p>
+		<p>
 			<label for="password" class="label">
 				角色：
 			</label>
-			<div class="input">
-					<select id="roletype" name ="roletype">
-                         <option value=1>管理员</option>
-                         <option value=2>运营商</option>
-            </select>
-			</div>
-		</div>
-		<div class="buttons">
-			<input type="submit" value="注册" class="button" />
-		</div>
+				<select id="roletype" name ="roletype">
+                    <option value=1>管理员</option>
+                    <option value=2>运营商</option>
+				</select>
+		</p>
+		<p>
+			<input type="submit" value="注册" class="button blue" />
+		</p>
 	</form>
+</div>
 </div>
 </%def>

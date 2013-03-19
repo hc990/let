@@ -13,7 +13,7 @@ class SessionMiddleware():
         self.request.session.save()
         
         #delete the session from the session
-        del self.request.session
+        del self.request.session  
     
     def view_hook(self, view):
         #add the session to the view so its accessable in our template

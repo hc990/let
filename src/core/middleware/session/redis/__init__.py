@@ -63,7 +63,7 @@ class Session():
         # Save the data as a json string
         Redis.db.set(self.session_id, json.dumps(self.data));
         # Update the ttl
-        Redis.db.expireat(self.session_id, expires)
+        Redis.db.expireat(self.session_id, expires)  
         self.saved = True
 
 

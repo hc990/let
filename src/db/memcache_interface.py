@@ -1,4 +1,4 @@
-import memcache
+import memcache  
 from core.singleton import Singleton
 
 class Memcache(Singleton):

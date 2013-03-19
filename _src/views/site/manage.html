@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<script type="text/javascript">
+function _do_del(cname){
+alert(cname);
+}
+
+</script>
+
+<%! 
+import time
+    %>
+<div id="page-header">
+	<div class="title">
+		运营商管理界面
+	</div>
+	<div class="subtitle">
+	    用户信息
+	</div>
+</div>
+<table>
+<form action="/manage" method="post" >
+	 
+  <tr>
+     <td><label for="cname" class="label">客户名称:</label></td>
+			  <td>
+				<input type="text" id="cname" name="cname" value="${cname}"/>
+			</td>
+	<td><label for="status" class="status">状态:</label></td>
+     <td>
+		<select id="status" name ="status">
+		% if status == '0':
+              <option value='0'  selected >激活</option>  
+              <option value='1' >注销</option> 
+        % else:
+		      <option value='0'> 激活</option>  
+              <option value='1' selected >注销</option> 
+		% endif
+		
+                  
+        </select>
+    </td><td><input type="submit"  class="button" value="查询" /></td>
+   </tr>
+</form>
+</table>
+<br>
+	<div class="field">
+<table>
+			<tbody>
+				<tr>
+				    <th align="center">编号</th>
+					<th align="center">客户名称</th>
+					<th align="center">描述</th>
+					<th align="center">状态</th>
+					<th align="center">满幅带宽(单位:兆)</th>
+					<th align="center">剩余时间(单位:小时)</th>
+					<th align="center">注册时间</th>	
+					<th align="center">使用起始</th>
+					<th align="center">使用结束</th>
+					<th align="center">操作</th>
+					
+				</tr>
+				<% i=1 %>
+				% for c in custormers:
+				<tr>
+				    <td align="center">${i}</td>
+				    <% i=i+1 %>
+				    
+				 
+					<td>${c['cname']}</td>
+					<td>${c['description']}</td>
+					<td>
+					    % if c['status']==1: 
+					          未激活
+					    % else: 
+					          激活
+					    % endif
+					</td>
+					 
+					<td align="right" >${c['ctype']}</td>
+					<% ct = c['created_at'].strftime("%y-%m-%d %H:%M:%S") %>
+					<%cn=c['_id'] %>
+					<td align="right">${c['continue_to']}</td>
+					<td>${ct}</td>
+					
+					<td>${c['begin_at']}</td>
+					<td>${c['suspended_at']}</td>
+					
+					<td align="center"><input type="button" class="button" value="注销" onclick="_do_del(${cn})"  />  <input type="button" class="button" value="激活" /></td>
+				</tr>
+				% endfor
+			</tbody>
+		</table>
+</div>
+</%def>

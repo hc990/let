@@ -25,7 +25,7 @@ mako_modules_dir = "%s/tmp/mako_modules" % app_path
 log = "%s/tmp/log/application.log" % app_path
 
 #define a database host
-db_host = '127.0.0.1'
+db_host = '192.168.11.201'
 
 #define the database port
 db_port = 27017
@@ -55,7 +55,14 @@ cookie_secret = "setthistoyourowncookiesecret"
 
 middleware_classes = [
     "core.middleware.flash.middleware.FlashMiddleware",
-#    "core.middleware.session.middleware.SessionMiddleware"
-    "core.middleware.session.redis.middleware.SessionMiddleware"  
+    "core.middleware.session.middleware.SessionMiddleware"
+#    "core.middleware.session.redis.middleware.SessionMiddleware"  
      #"whirlwind.middleware.session.memcache.middleware.SessionMiddleware"
 ]
+
+service_ip='192.168.11.201'
+  
+telnet_key_dir = '/home/junzhong/keys/jz_keys'
+
+#telnet_key_dir = 'e:/keys/jz_keys.txt'
+

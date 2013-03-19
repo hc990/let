@@ -7,7 +7,7 @@ define("version", default="0.1", help="app version")
 define("mode", default="development", help="run in development or production mode")
 
 #define a port for testing
-define("port", default=8888, help="run on the given port", type=int)
+define("port", default=8000, help="run on the given port", type=int)
 
 #define the path for the app
 define("static_path", default='resources', help="define the path for the app")
@@ -19,7 +19,7 @@ define("template_dir", default='/tmp/views', help="set the dir for mako to look 
 define("mako_modules_dir", default='/tmp/templates/mako_modules', help="set the dir for mako to cache compiled templates")
 
 #define a database host
-define("db_host", default='localhost', help="connect to the db on this host")
+define("db_host", default='127.0.0.1', help="connect to the db on this host")
 
 #define the database port
 define("db_port", default=27017, help="connect to the db on this port", type=int)
@@ -42,3 +42,10 @@ define("redis_port", default=6379, type=int)
 define("redis_db", default=None, type=int)
 
 define("memcache_host", default=None)
+
+define("service_ip",default="192.168.0.2")
+#define the telnet password saved diractory
+define("telnet_key_dir", default='/home/junzhong/keys')
+
+define("jz_keys", default="jz_keys")
+
