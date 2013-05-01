@@ -1,1 +1,0 @@
-'''Created on 2012-6-3@author: zongzong'''from urlparse import urlparsefrom BeautifulSoup import BeautifulSoupurl = 'http://netloc/path;param?query=arg#frag'parsed = urlparse(url)print parsed
