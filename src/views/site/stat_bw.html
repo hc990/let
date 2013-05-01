@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<%! import time %>
+<div class="box">
+<div class="box-header">
+	  <h1>使用信息统计</h1>
+</div>
+<div class="box-content">
+	<table>
+		<thead>
+				<tr>
+					<th align="center">编号</th>
+				    <th align="center">套餐名称</th>
+				    <th align="center">交换机ip</th>
+				    <th align="center">交换机端口</th>
+				    <th align="center">执行时间</th>
+				    <th align="center">执行状态</th>									
+				</tr>
+			</thead>
+			<tbody>
+				<% i=1 %>
+			    % for c in paginator.page:
+				<tr style="cursor:pointer">
+				    <td align="center" >${i}</td>
+				    <% i=i+1 %>
+					<td>${c['package_id']}</td>
+					<td>${c['ipAddress']}</td>
+					<td>${c['port']}</td>
+					<td>${c['custom_time']}</td>
+					<td>
+					% if c['status']==0: 
+						  已执行
+					% else: 
+						  未执行
+					% endif
+					</td>
+				</tr>
+		        % endfor	  
+		      </tbody>
+		      <tfoot>      
+		        <tr id="ui-detail-row" >
+		        	<td colspan="10">
+		        		<table id="ui-detail-content">		        			
+		        		</table>
+		        	</td>
+		        </tr>
+			</tfoot>
+	</table>
+		第 ${paginator.current_page} 页  ｜ 共 ${paginator.page_count}页   
+			<!-- if there is a previous page print a back link -->
+            % if paginator.has_previous:
+                  <a href="${paginator.previous_page_link(request)}"><< back</a>
+            % endif
+            <!-- if there is a previous and a next page print a divider -->
+                  % if paginator.has_previous and paginator.has_next:
+                  | 
+            % endif
+            <!-- if there is a next page print a next link -->
+            % if paginator.has_next:
+                    <a href="${paginator.next_page_link(request)}">next >></a>
+            % endif
+</div>
+</div>
+</%def>

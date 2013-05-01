@@ -1,0 +1,176 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<div class="box">
+	<div class="box-header">
+		<h1>套餐管理</h1>
+	</div>
+	<div class="box-content">
+	<form action="/get_packages" method="post" >
+	<table>		 
+		<tr>
+			<td><label for="package_name" class="label">套餐名称:</label></td>
+			<td>
+				<input type="text" id="package_name" name="package_name" value="${_id or ''}" />
+			</td>			
+			<td><label for="status" class="status">状态:</label></td>
+			<td>
+				<select id="status" name ="status" placeholder="City" class="{validate:{required:true}}"> 
+				      <option value='' >全部</option>
+				      <option value=0 >注销</option>
+					  <option value=1 >激活</option>  
+				</select>
+			</td>
+			<td><button type="submit" class="button"><span class="ui-icon ui-icon-search"></span>查詢</button></td>
+		</tr>
+	</table>
+</form>
+</div>
+</div>
+
+
+<div class="box">
+<div class="box-header"></div>
+<div class="box-content">
+	<table>
+		<thead>
+			<tr>
+				<th align="center">序号</th>
+				<th align="center">套餐名称</th>
+				<th align="center">可用时长(小时/天）</th>
+				<th align="center">有效开始时间</th>
+				<th align="center">有效结束时间</th>
+				<th align="center">可用周状态</th>
+				<th align="center">创建时间</th>	
+				<th align="center">状态</th>	
+				<th align="center">操作</th>			
+			</tr>
+		</thead>
+		<tbody>
+		 	<% i=1 %> 
+			% for e in paginator.page:
+			<tr>
+			 	<td align="center">${i}</td> 
+			 	<% i=i+1 %>
+				<td>${e['_id']}</td>
+				<td>${e['avail_timelong']}</td>
+				<td>当日${e['avail_begintime']}:00</td>
+				% if e['avail_begintime'] >= e['avail_endtime']:
+						<td>次日${e['avail_endtime']}:00</td>
+					% else:
+						<td>当日${e['avail_endtime']}:00</td>
+					% endif
+
+			    <td>
+					% if e['is_weekday']==0: 
+						  工作日
+					% else: 
+						  每天
+					% endif
+				</td>
+			    <% cd = e['created_at'].strftime("%y-%m-%d %H:%M:%S") %>
+					<td>${cd}</td>
+			    <td>
+					% if e['status']==0: 
+						  注销
+					% else: 
+						  激活
+					% endif
+				</td>
+			    <td align="center">
+				 	<input type="hidden" value="${e['_id']}" class="_id" name="_id" />
+				<!--	<input type="button" class="button small blue" value="删除" /> -->
+					<a href="../update_package?package_name=${e['_id']}" class="button small blue">修改</a>
+					<input type="button" class="button small black" value="注销" />  
+					<input type="button" class="button small blue" value="激活" />
+				</td>
+			</tr>
+			% endfor			
+		</tbody>
+	</table>
+	
+
+			第 ${paginator.current_page} 页  ｜ 共 ${paginator.page_count}页   
+			
+			<!-- if there is a previous page print a back link -->
+            % if paginator.has_previous:
+                  <a href="${paginator.previous_page_link(request)}"><< back</a>
+            % endif
+
+            <!-- if there is a previous and a next page print a divider -->
+                  % if paginator.has_previous and paginator.has_next:
+                  | 
+            % endif
+
+            <!-- if there is a next page print a next link -->
+            % if paginator.has_next:
+                    <a href="${paginator.next_page_link(request)}">next >></a>
+            % endif
+     </div>
+</div>
+
+
+<script type="text/javascript">
+
+$(function(){
+		
+	$('input[value="删除"]').click(function(){
+		if(confirm('您确定删除该套餐？')) 
+		$.ajax({
+			url:'delPackage?package_name='+$(this).parent().parent().find('._id').val(),
+			type:'post',			
+			success:success,			
+			statusCode: {
+				404: function() {
+    				alert('page not found');
+  				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	});
+	
+	$('input[value="激活"]').click(function(){
+		if(confirm('您确定激活该套餐吗？')) 
+		$.ajax({
+			url:'active_package?package_name='+$(this).parent().parent().find('._id').val(),
+			type:'post',			
+			success:success,			
+			statusCode: {
+				404: function() {
+    				alert('page not found');
+  				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	});
+	
+	$('input[value="注销"]').click(function(){
+		if(confirm('您确定注销该套餐吗？')) 
+		$.ajax({
+			url:'logoff_package?package_name='+$(this).parent().parent().find('._id').val(),
+			type:'post',			
+			success:success,			
+			statusCode: {
+				404: function() {
+    				alert('page not found');
+  				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	});
+	
+
+	
+	function success(){
+	    window.location.reload();
+	}
+});
+
+</script>         
+</%def>

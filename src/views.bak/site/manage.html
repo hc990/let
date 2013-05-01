@@ -1,0 +1,160 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<%! 
+import time
+    %>
+<div id="page-header">
+	<div class="title">
+		运营商管理界面
+	</div>
+	<div class="subtitle">
+	            客户信息
+	</div>
+</div>
+<form action="/manage" method="post" >
+	<table>		 
+		<tr>
+			<td><label for="cname" class="label">客户名称:</label></td>
+			<td>
+				<input type="text" id="cname" name="cname" value="${cname or ''}" />
+			</td>
+			<td><label for="status" class="status">状态:</label></td>
+			<td>
+				<select id="status" name ="status">
+				% if status is not None and status is not '':
+				   % if int(status) == 0:
+				      <option value='' >全部</option>
+					  <option value=0  selected>注销</option>  
+					  <option value=1 >激活</option>   
+				   % else:
+				      <option value='' >全部</option>
+					  <option value=0 >注销</option>
+					  <option value=1 selected>激活</option> 
+				   % endif	 
+				% else:   
+				      <option value='' selected>全部</option>
+				      <option value=0 >注销</option>
+					  <option value=1 >激活</option> 
+				% endif	  
+				</select>
+			</td>
+			<td><input type="submit"  class="button" value="查询" /></td>
+		</tr>
+	</table>
+</form>
+<br>
+<div class="field">
+	<table>
+		<tbody>
+			<tr>
+				<th align="center">编号</th>
+				<th align="center">客户名称</th>
+				<th align="center">客户地址</th>
+				<th align="center">客户电话</th>
+				<th align="center">状态</th>
+				<th align="center">产品带宽</th>
+				<th align="center">剩余时间</th>
+				<th align="center">注册时间</th>
+				<!--<th align="center">起始IP</th>
+				<th align="center">结束IP</th>-->
+				<th align="center">价格</th>
+				<th align="center">使用起始</th>
+				<th align="center">使用结束</th>
+				<th align="center">操作</th>				
+			</tr>
+			<% i=1 %>
+			% for c in paginator.page:
+			<tr>
+				<td align="center">${i}</td>
+				<% i=i+1 %>
+				<td>${c['cname']}</td>
+				<td>${c['address']}</td>
+			    <td>${c['phonenum']}</td>
+				<td>
+					% if c['status']==0: 
+						  注销
+					% else: 
+						  激活
+					% endif
+				</td>
+				<td align="right" >${c['ctype']}M</td>
+				<% ct = c['created_at'].strftime("%y-%m-%d %H:%M:%S") %>
+				<%cn=c['cname'] %>
+				<td align="right">${c['continue_to']}h</td>
+				<td>${ct}</td>	
+				<td>${c['price']}元</td>
+				<td>${c['begin_at']}</td>
+				<td>${c['suspended_at']}</td>
+				<input type="hidden" value="${c['_id']}" class="c_id" name="c_id" />
+				<td align="center">
+					<input type="button" class="button" value="注销" />  
+					<input type="button" class="button" value="激活" />
+				</td>
+			</tr>
+			% endfor  
+			<br>
+		</tbody>
+	</table>
+</div>
+<div>
+			第 ${paginator.current_page} 页  ｜ 共 ${paginator.page_count}页   
+			
+			<!-- if there is a previous page print a back link -->
+            % if paginator.has_previous:
+                  <a href="${paginator.previous_page_link(request)}"><< back</a>
+            % endif
+
+            <!-- if there is a previous and a next page print a divider -->
+                  % if paginator.has_previous and paginator.has_next:
+                  | 
+            % endif
+
+            <!-- if there is a next page print a next link -->
+            % if paginator.has_next:
+                    <a href="${paginator.next_page_link(request)}">next >></a>
+            % endif
+            </div>
+            
+            
+            
+ <script type="text/javascript">           
+ $('input[value="激活"]').click(function(){
+		if(confirm('您确定激活该客户吗？')) 
+		$.ajax({
+			url:'custorm_active?c_id='+$(this).parent().parent().find('.c_id').val(),
+			type:'post',			
+			success:success,			
+			statusCode: {
+				404: function() {
+    				alert('page not found');
+  				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	});
+	
+	$('input[value="注销"]').click(function(){
+		if(confirm('您确定注销该客户吗？')) 
+		$.ajax({
+			url:'custorm_del?c_id='+$(this).parent().parent().find('.c_id').val(),
+			type:'post',			
+			success:success,			
+			statusCode: {
+				404: function() {
+    				alert('page not found');
+  				}
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert(textStatus);
+			}
+		});
+	});
+	
+	function success(){
+	    window.location.reload();
+	}           
+</script>        
+</%def>

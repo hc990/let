@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+ <div>
+<%def name="body()">
+
+<html>
+		
+			
+				<p>
+					<lable>objectName:</lable>
+					<lable>${values['objectName']}</lable>	
+				</p>
+				<p>
+					<lable>匹配信息:</lable>
+					<lable>${values['sysdescription']}</lable>	
+				</p>
+				<!-- 
+				<script language="javascript" type="text/javascript">
+     					 window.history.back(-1);
+				</script>
+				 -->
+				<script LANGUAGE="JavaScript">
+						function goHist(a)
+						{
+						history.go(a);
+						}
+
+				</script>
+		
+		<p>
+			<form method="post" action="custorm_add">
+			 <input TYPE="button" VALUE="后退" onClick="goHist(-1)"/>
+			</form>
+			<!-- <lable><a href="../custorm_add"   onClick="goHist(-1)">添加用户</a></lable> -->
+		</p>	
+	
+	
+
+	
+		
+ </div>
+</html>
+
+
+</%def>

@@ -1,0 +1,182 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<div class="box">
+	<div class="box-header">
+		<h1>添加用户界面-用户与产品信息</h1>
+	</div>
+<div class="box-content">
+<form action="/custorm_add" method="post" >
+<p>
+			<label for="cname" class="label">客户名称:</label>
+				<input type="text" id="cname" name="cname" class="required"/>
+</p>
+<p>
+			<label for="linenum" class="label">线路编号:</label>
+				<input type="text" id="linenum" name="linenum" class="required"/>
+</p>
+<p>
+			<label for="package_id" class="label">套餐类型:</label>
+				<select id="package_id" name="package_id" class="required">
+				% for p in packages:
+				     <option value=${p['_id']} >${p['_id']}</option>  
+			    % endfor		
+				</select>			
+</p>  
+<p>	
+			<label for="address" class="label">客户地址:</label>
+				<input type="text" id="address" name="address" class="required"/>
+</p>
+<p>
+			<label for="phonenum" class="label">联系电话:</label>
+				<input type="text" id="phonenum" name="phonenum" class="required integer"/>
+<p>							
+			<label for="email" class="label">电子邮件:</label>  
+				<input type="text" id="email" name="email" placeholder="email@example.com"  class="required email" />
+</p>
+<p>
+			<label for="e_id" class="label">设备类型:</label>
+				<select id="e_id" name="e_id" class="required">
+				% for e in exchanges:
+				     <option value=${e['_id']} >${e['ename']}</option>  
+			    % endfor		
+				</select>
+</p>  
+<p>
+			<label for="port" class="label">端口号：</label>
+				  <input type="text" id="port" name="port" class="required integer" />
+</p>
+<p>
+			<label for="ori_bandwidth" class="label">原始带宽(单位：兆)：</label>
+				  <input type="text" id="ori_bandwidth" name="ori_bandwidth"  class="required integer"/>
+</p>
+<p>
+			<label for="ascend_bandwidth" class="label">提升带宽(单位：兆):</label>
+				<select id="ascend_bandwidth" name="ascend_bandwidth" class="required" onchange="CheckBandwidth()"/>
+				      % for e in range(20):
+				         <option value=${e+1} >${e+1}</option>
+			          % endfor        
+			          <option value=50>50</option>  
+			          <option value=100>100</option>
+			    </select>
+</p>
+
+<p>
+			<label for="custom_times" class="custom_times">定制开始时间:</label>
+			<td>
+				<select id="custom_time" name ="custom_time" class="required">
+				</select>
+			</td>
+</p>
+<!--
+<p>
+		<label for="custom_time" class="custom_time">定制每天使用开始时间:</label>
+		<script language="javascript" type="text/javascript" src="/static/DatePicker/WdatePicker.js"></script>
+		<input type="text" id="custom_time" name="custom_time" onfocus="WdatePicker({skin:'whyGreen',dateFmt:'H:mm'})"  class="Wdate" placeholder="A:9:00~19:00  B:allday C:19:00~8:00"/> 
+</p>
+-->
+<p>
+			<label for="begin_at" class="label">开始时间:</label>  
+				 <input type="datetime" class="datepicker_date" name="begin_at" class="required"/>	
+</p>
+<p>
+			<label for="suspended_at" class="label">过期时间:</label> 
+				 <input type="datetime" class="datepicker_date" name="suspended_at" class="required"/>	
+</p>
+<p>
+				<input type="submit" class="button blue" value="添加"/>   
+				<input type="reset" class="button" value="重置"/>
+				<input type="button" class="button small blue" value="端口校验"/>  
+</p>
+</form>  
+				  		
+</div>				
+</div>
+<script type="text/javascript">
+        			
+/*$('#fileTab').tabs({
+		ajaxOptions: {
+			error: function( xhr, status, index, anchor ) {
+				$( anchor.hash ).html("该页无法显示，没法华丽扯淡！" );
+			}
+		},    
+		select:function(obj,tab){	      	
+			var subWeb = document.frames ? document.frames[tab.panel.id].document : document.getElementById(tab.panel.id).contentDocument;
+			switch(tab.panel.id)
+			{
+			case "thisMonth":$(tab.panel).find('iframe').attr('src','/manage');
+			//$(tab.panel).find('iframe').attr("height",subWeb.body.scrollHeight);break;
+			default:$(tab.panel).find('iframe').attr('src','');break;
+			}		
+		}
+	});*/ 
+$('input[type="datetime"]').click(function(){
+    $('.ui-datepicker').css({'z-index':999});   
+});
+
+/*
+function Display(){
+	var port=$("#port").val();
+	confirm(port);
+}
+*/
+
+function CheckBandwidth(){
+	var ori_bandwidth=$("#ori_bandwidth").val();
+	var ascend_bandwidth=$("#ascend_bandwidth").val();
+	if (ascend_bandwidth <= ori_bandwidth){
+		alert("无效值，请输入比原始带宽大的提升带宽值！");
+	}
+}
+
+$("#package_id").change(function(){
+		var packname=$("#package_id").val();
+        //alert(packname); 
+        $("#custom_time1").remove();
+        /*
+        $.ajax({
+        		type:"get",
+        		dataTpye:"json",
+        		url:'get_parameters?package_name='+packname,
+        		success:function(msg){
+        			alter(msg);
+        		}
+        	});
+        */	
+        if(packname == 'A'){	
+        	var str="<select id='custom_time1' name='custom_time1'>";     	
+			$(function(){
+				for(i=9; i<15;i++){
+				     str+= "<option value='"+i+"'> 当日"+i+":00</option>";
+				     }
+				});
+			str+="</select>";
+			$('#custom_time').after(str);
+        }else if(packname == 'B'){
+        	var str="<select id='custom_time1' name='custom_time1'>";
+			$(function(){
+				for(i=0; i<24;i++){
+				     str+= "<option value='"+i+"'> 当日"+i+":00</option>";
+				     }
+				});
+			str+="</select>";
+			$('#custom_time').after(str);
+        }else{
+        	var str="<select id='custom_time1' name='custom_time1'>";
+			$(function(){
+				for(i=19; i<21;i++){
+				     str+= "<option value='"+i+"'> 当日"+i+":00</option>";
+				     }
+				});
+			str+="</select>";
+			$('#custom_time').after(str);
+        }  		
+	});	
+	
+$('#button small blue').click(function(){
+   alert('aa')
+});
+	
+
+</script>
+</%def>

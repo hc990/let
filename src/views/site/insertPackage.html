@@ -1,0 +1,135 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+	<div class="box">
+	<div class="box-header">
+		<h1>添加套餐</h1>
+	</div>
+	<div class="box-content">
+	<form action="/insert_package" method="post"> 
+		<p>
+			<label for="package_name" class="label">
+				套餐名称：
+			</label>
+				<input type="text" id="package_name" name="package_name"/>
+		</p>
+		
+		<p>
+			<label for="avail_timelong" class="label">
+				可用时长(小时/天）：
+			</label>
+				<input type="text" id="avail_timelong" name="avail_timelong" class="required integer"/>
+		</p>
+		
+		<p>
+			<label for="avail_begintime" class="label">
+				开始时间：
+			</label>
+				<select id="avail_begintime" name="avail_begintime">
+					% for e in range(24):
+				         <option value=${e}>当日${e}:00</option>
+			        % endfor  
+				</select>
+		</p>
+		
+		<p>
+			<label for="avail_endtime" class="label">
+				结束时间：
+			</label>
+				<select id="avail_endtime" name="avail_endtime" >
+				</select>
+		
+		</p>
+		<p>
+			<label for="avail_weektime" class="label">
+				可用周状态：
+			</label>
+				<select id="is_weekday" name="is_weekday" class="required">
+					<option value=0>工作日</option>
+					<option value=1>每天</option>
+				</select>
+		</p>
+		<p>
+			<input type="submit" value="添加" class="button blue" />
+			<input type="reset" class="button" value="重置"/>
+		</p>
+	</form>
+  </div> 
+</div>
+<script type="text/javascript">
+/*
+		$("#avail_begintime").change(function(){
+		var text=$("#avail_begintime").val();
+		alert(text);
+		$(function(){
+		for(i=0; i<24;i++){     
+			alert("<option value='"+i+"'>当日"+i+"：00</option>");  
+				//$("#avail_endtime").append("<option value='"+i+"'> 当日"+i+"：00</option>");     
+		}
+		});  
+		 $(function(){
+		 for(i=0; i<text;i++){
+		 $("#avail_endtime").append("<option value='"+i+"'> 次日"+i+"：00</option>");}
+		 });  
+		 });
+
+	$("#avail_begintime").change(function(){
+	    alert("1111")
+		var str="<select>"; 
+		for(i=0; i<5;i++){  
+		   str+="<option value=''>aaaa</option>"; 
+		}
+		str+="</select>"; 
+		$('#avail_begintime').after(str);
+		
+	});
+
+    $('#s1').change(function(){$('#s2').append('<option>'+$(this).val()+'</option>');});
+*/
+/*
+	$("#avail_begintime").change(function(){
+	    
+		var str="<select id='avail_endtime1' name = 'avail_endtime1'>";
+		var text=$("#avail_endtime1").val();
+		$(function(){
+		for(i=++text; i<24;i++){
+		     //alert("<option value='"+i+"'>当日"+i+":00</option>"); 
+		     str+= "<option value='"+i+"'> 当日"+i+":00</option>";
+		     }
+		});
+		$(function(){
+		for(i=0; i<text;i++){
+			//$("#avail_endtime").append("<option value='"+i+"'> 次日"+i+":00</option>");
+			str+= "<option value='"+i+"'> 次日"+i+":00</option>";
+			}
+		});   
+		str+="</select>";
+		$('#avail_endtime').after(str);   
+		
+	});
+*/
+
+	$("#avail_begintime").change(function(){
+	    
+	
+		var text=$("#avail_endtime1").val();
+		$(function(){
+		var str="<select id='avail_endtime1' name = 'avail_endtime1'>";
+		for(i=++text; i<24;i++){
+		     //alert("<option value='"+i+"'>当日"+i+":00</option>"); 
+		     str+= "<option value='"+i+"'> 当日"+i+":00</option>";
+		     }
+		for(i=0; i<text;i++){
+			//$("#avail_endtime").append("<option value='"+i+"'> 次日"+i+":00</option>");
+			str+= "<option value='"+i+"'> 次日"+i+":00</option>";
+			}
+		});   
+		str+="</select>";
+		$('#avail_endtime').after(str);   
+		
+	});
+
+
+
+</script>
+</%def> 
