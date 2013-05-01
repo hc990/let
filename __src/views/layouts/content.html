@@ -1,0 +1,83 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/base.html" />
+
+### Template for content pages
+<%def name="body()">
+	<!-- Primary navigation -->
+	<nav id="primary">
+		<ul>
+			% if current_user['roletype']==2 :
+							<li>
+								<a href="../manage"><span class="glyph dashboard"></span>查询用户</a>
+							</li>
+							<li>
+								<a href="../custorm_add"><span class="glyph shuffle"></span>添加用户</a>
+							</li>
+							<li>
+								<a href="../pwdchange"><span class="glyph pencil"></span>密码重置</a>
+							</li>
+							<li>
+								<a href="../get_exchanges"><span class="glyph eye"></span>交换机查询</a>
+							</li>
+							<li>
+								<a href="../add_exchange"><span class="glyph listicon"></span>交换机设置</a>
+							</li>
+							<li>
+								<a href="../bwstat"><span class="glyph chart"></span>统计</a>
+							</li>
+				% elif  current_user['roletype']==3 :
+							<li>
+								<a href="../product"><span class="glyph dashboard"></span>信息查询</a>
+							</li>
+							<li>
+								<a href="../pwdchange"><span class="glyph pencil"></span>密码重置</a>
+							</li>
+				% else:
+							<li>
+								<a href="../get_admin"><span class="glyph dashboard"></span>管理员管理</a>
+							</li>  
+							<li>
+								<a href="../get_users"><span class="glyph listicon"></span>运营商管理</a>
+							</li>
+							<li>
+								<a href="../signup"><span class="glyph shuffle"></span>添加角色</a>
+							</li> 
+							<li>
+								<a href="../pwdchange"><span class="glyph pencil"></span>密码重置</a>
+							</li>
+				% endif	
+			<li class="bottom">
+				<a href="/logout">
+					<span class="glyph quit"></span>
+					退出系统
+          </a>
+			</li>
+		</ul>
+	</nav>
+	<!-- Secondary navigation -->
+	<nav id="secondary" style="width:10px; overflow:hidden;">
+		<ul>
+			<li><a href="../charts/linechart.html">Line chart</a></li>
+			<li><a href="../charts/barchart.html">Bar chart</a></li>
+			<li><a href="../charts/realtime.html">Realtime chart</a></li>
+			<li><a href="../charts/piechart.html">Pie chart</a></li>
+		</ul>
+
+		<div id="notifications">
+			<ul>
+			</ul>
+		</div>
+	</nav>
+	
+	<section id="maincontainer">
+		<div id="main" class="container_12">
+		<%include file="/shared/header.html"/>
+				<%def name="body_content()">
+					${next.body()}
+				</%def>
+				${body_content()}
+		</div>
+	</section>
+
+	
+</%def>

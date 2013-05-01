@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<div class="box">
+	<div class="box-header">
+		<h1>修改密码</h1>
+	</div>
+	<div class="box-content">
+	<form action="/pwdchange" method="post"> 
+		<input type="hidden" name="next" value="${next}" /> 
+		
+		<p>
+			<label for="password" class="label">
+				原密码：
+			</label>
+				<input type="password" id="password" name="password"/>
+		</p>
+		<p>
+			<label for="password" class="label">
+				新密码：
+			</label>
+				<input type="password" id="new_pw" name="new_pw"/>
+		</p>
+		<p>
+			<label for="password2" class="label">
+				请再次输入密码：
+			</label>
+				<input type="password" id="new_pw_again" name="new_pw_again"/>
+		</p>
+		<p>
+			<div>
+				<button type="submit" class="blue button"><span class=""></span>確定</button>
+			</div>
+		</p>
+	</form>
+	</div>
+</div>
+</%def>

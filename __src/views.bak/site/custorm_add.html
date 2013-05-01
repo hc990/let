@@ -1,0 +1,107 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+
+<%def name="body()">
+<div id="page-header">
+	<div class="title">
+		添加用户界面
+	</div>
+	<div class="subtitle">
+	    用户与产品信息
+	</div>
+</div>
+<div class="form" style="margin:0 auto 0 auto;width: 300px;">
+<form action="/custorm_add" method="post" >
+	<div class="field">
+		<fieldset>
+			<label for="cname" class="label">客户名称:</label>
+			<div class="input">
+				<input type="text" id="cname" name="cname" class="required"/>
+			</div>	
+			<label for="address" class="label">地址:</label>
+			<div class="input">
+				<input type="text" id="address" name="address" class="required"/>
+			</div>
+			<label for="phonenum" class="label">联系电话:</label>
+			<div class="input">
+				<input type="text" id="phonenum" name="phonenum" class="required integer"/>
+			</div>
+			<label for="device" class="label">设备名称:</label>
+			<div class="select">
+				  <select id="e_id" name="e_id" class="required">
+				     % if exchanges is not None:  
+			            % for c in exchanges:
+				          <option value='${c['_id']}' >${c['ename']}</option>	  
+					    % endfor	    
+					 % endif 	  
+				  <select/>  
+			</div>
+			<label for="vlan" class="label">vlan:</label>
+			<div class="input">
+				<input type="text" id="vlan" name="vlan" class="integer"/>
+			</div>
+			<label for="port" class="label">对应端口:</label>
+			<div class="input">  
+				  <input type="text" id="port" name="port"/>
+			</div>
+			<label for="type" class="label">产品带宽:</label>
+			<div class="input">
+				<input type="text" id="type" name="type" class="required integer"/>M(单位：兆)
+			</div>
+			<label for="continue_to" class="label">可用时间：</label>
+			<div class="input">
+				<input type="text" id="continue_to" name="continue_to" class="required integer"/>h(单位：小时)
+			</div>
+			<!--<label for="begin_ip" class="label">开始ip:(格式***.***.***.***)</label>  
+			<div class="input">  
+				 <input type="text" id="begin_ip" name="begin_ip" class="required 2ip"/>  
+			</div>
+			<label for="suspended_ip" class="label">结束ip:(格式***.***.***.***)</label>
+			<div class="input">  
+				  <input type="text" id="suspended_ip" name="suspended_ip" class="required 2ip"/>
+			</div>-->
+			<label for="begin_at" class="label">开始时间:</label>  
+			<div class="input">
+				 <input type="datetime" class="datepicker_date" name="begin_at" class="required"/>	
+			</div>
+			<label for="suspended_at" class="label">过期时间:</label> 
+			<div class="input">
+				 <input type="datetime" class="datepicker_date" name="suspended_at" class="required"/>	
+			</div>	
+			<label for="price" class="label">价格:</label>
+			<div class="input">
+				<input type="text" id="price" name="price" class="required integer"/>Y(单位：元)
+			</div>
+			<div class="buttons">
+				<input type="reset" class="button"/>
+				<input type="submit" class="button" value="添加"/>   
+			</div>
+		</fieldset>
+	</div>
+</form>
+</div>				
+<div class="tab-footer clear">
+	   <div class="pager fr">
+       </div>
+</div>
+
+<script type="text/javascript">
+/*$('#fileTab').tabs({
+		ajaxOptions: {
+			error: function( xhr, status, index, anchor ) {
+				$( anchor.hash ).html("该页无法显示，没法华丽扯淡！" );
+			}
+		},
+		select:function(obj,tab){		
+			var subWeb = document.frames ? document.frames[tab.panel.id].document : document.getElementById(tab.panel.id).contentDocument;
+			switch(tab.panel.id)
+			{
+			case "thisMonth":$(tab.panel).find('iframe').attr('src','/manage');
+			//$(tab.panel).find('iframe').attr("height",subWeb.body.scrollHeight);break;
+			default:$(tab.panel).find('iframe').attr('src','');break;
+			}		
+		}
+	});*/
+</script>
+</%def>
+<a href="http://www.jztech.cn" target="new">更多技术支持，欢迎访问君众科技公司网站！</a>   

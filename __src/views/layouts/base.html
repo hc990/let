@@ -1,0 +1,85 @@
+# -*- coding: utf-8 -*- ### Base template for html pages.
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-CN"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-CN"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-CN"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-CN">
+<!--<![endif]-->
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	<%def name="page_title()">君众科技</%def>
+	<title>
+		${self.page_title()}
+	</title>
+	
+	<meta name="keywords" content="" />
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js?${Filters.version()}"></script>
+	<![endif]-->
+	
+	<link rel="stylesheet" href="/static/css/reset.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/icons.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/formalize.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/checkboxes.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/sourcerer.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/jqueryui.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/tipsy.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/calendar.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/tags.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/fonts.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/selectboxes.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/960.css?${Filters.version()}" />
+	<link rel="stylesheet" href="/static/css/main.css?${Filters.version()}" />
+	<link rel="stylesheet" media="all and (orientation:portrait)" href="/static/css/portrait.css?${Filters.version()}" />
+	<link rel="apple-touch-icon" href="/static/apple-touch-icon-precomposed.png" />
+	<link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+	
+	
+	
+	<!--[if lt IE 9]>
+    <script src="/static/js/html5.js?${Filters.version()}"></script>
+    <![endif]-->
+
+	<!-- JavaScript -->
+	<script src="/static/js/jquery.min.js?${Filters.version()}"></script>
+	<script src="/static/js/jqueryui.min.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.cookies.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.pjax.js?${Filters.version()}"></script>
+	<script src="/static/js/formalize.min.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.metadata.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.validate.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.checkboxes.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.chosen.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.fileinput.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.datatables.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.sourcerer.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.tipsy.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.calendar.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.inputtags.min.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.wymeditor.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.livequery.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery.flot.min.js?${Filters.version()}"></script>
+	<script src="/static/js/jquery-ui-timepicker-addon.js?${Filters.version()}"></script>
+	<script src="/static/js/application.js?${Filters.version()}"></script>
+	
+	${self.head_tags()}
+	<%def name="head_tags()"></%def>
+</head>
+<body>
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+	
+	${next.body()}
+	  
+    
+	${self.scripts()} 
+	<%def name="scripts()"></%def>
+	
+</body>
+</html>

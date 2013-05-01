@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/content.html" />
+<%def name="body()">
+<%! import time %>
+<div id="page-header">
+	<div class="title">
+		统计界面
+	</div>
+	<div class="subtitle">
+	          使用信息统计
+	</div>
+</div>
+	<table>
+		<tbody>
+				<tr>
+					<th align="center">编号</th>
+				    <th align="center">客户名称</th>
+				    <th align="center">提升比率</th>
+				    <th align="center">起始时间</th>
+				    <th align="center">结束时间</th>							
+				</tr>
+				<% i=1 %>
+			    % for c in paginator.page:
+				<tr style="cursor:pointer">
+				    <td align="center" >${i}</td>
+				    <% i=i+1 %>
+					<td>${c['cname']}</td>
+					<td>${c['percent']}%</td>
+					<td>${c['begin_at']}</td>
+					<td>${c['suspended_at']}</td>
+				</tr>
+		        % endfor	        
+			</tbody>
+	</table>
+</%def>

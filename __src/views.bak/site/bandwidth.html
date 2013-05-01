@@ -1,0 +1,55 @@
+# -*- coding: utf-8 -*-
+<%def name="body()">
+<style>
+html{font-size:12px; font-family:''Hiragino Sans GB W3; -webkit-font-smoothing:antialiased; overflow:hidden;}
+body,div{font-size:1em; overflow:hidden;}
+span{width:auto; height:auto;}
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+</style>
+<link type="text/css" href="/static/css/jquery.ui.min.css" rel="stylesheet" />
+<link rel="stylesheet" media="all" type="text/css" href="/static/css/jquery-ui-timepicker-addon.css" />
+<script src="/static/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+<script src="/static/js/application.js?${Filters.version()}"></script>
+<script type="text/javascript" src="/static/js/menu.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-sliderAccess.js"></script>
+<div class="form" style="margin:0 auto 0 auto; overflow:hidden;">	
+<form action="/bandwidth" method="post" > 
+	<div class="field">
+		<fieldset>
+		    <input type="hidden" id="p_id" name="p_id" value="${p_id}"  class="required"/>
+		    <input type="hidden" id="cname" name="cname" value="${cname}"  class="required"/>
+		    <input type="hidden" id="oname" name="oname" value="${oname}"  class="required"/>
+		    <label for="cname" class="label">客户名称:${cname}</label>
+		    <br>
+		    <label for="oname" class="label">运营商名称:${oname}</label>
+		    <br>
+			<label for="percent" class="label">增加幅度:<select id="percent" name="percent" class="required"/>
+				      <option value=100>100</option>
+				      <option value=50>50</option>
+				      <option value=20>20</option>
+			</select>%(单位：百分比)</label>
+			<br>
+			<label for="begin_at" class="label">开始时间:</label>
+			<div class="input">
+				 <input type="datetime" id="begin_at" name="begin_at" class="datepicker_date required" required="required"/>	
+			</div>
+			<label for="suspended_at" class="label">结束时间:</label>
+			<div class="input">
+				 <input type="datetime" id="suspended_at" name="suspended_at" class="datepicker_date required"/>	
+			</div>			
+			<div class="buttons">
+				<input type="reset" class="button"/>
+				<input type="submit" class="button" value="确定" />
+			</div>
+		</fieldset>
+	</div>
+</form>	
+</div>
+</%def> 

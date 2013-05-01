@@ -1,0 +1,51 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/layouts/base.html" />
+<%def name="body()">
+<div class="form" style="margin:0 auto 0 auto;width: 250px;">
+	<div class="title">
+		修改交换机密码
+	</div>
+	<form action="/exchange_up" method="post"> 
+		<input type="hidden" value="${exchange['_id']}" class="e_id" name="e_id" />	
+		<div class="field">
+			<label for="password" class="label">
+				交换机名称：
+			</label>
+		         ${exchange['ename']}
+		 </div>        
+		 <div class="field">
+			<label for="password" class="label">
+				交换机IP地址：
+			</label>
+		         ${exchange['ipAddress']}
+		 </div>     
+		<div class="field">
+			<label for="password" class="label">
+				用户名：
+			</label>
+			<div class="input">
+				<input type="text" id="username" name="username"/>
+			</div>
+		</div>
+		<div class="field">
+			<label for="password" class="label">
+				新密码：
+			</label>
+			<div class="input">
+				<input type="password" id="new_pw" name="new_pw"/>
+			</div>
+		</div>
+		<div class="field">
+			<label for="password2" class="label">
+				请再次输入密码：
+			</label>
+			<div class="input">
+				<input type="password" id="new_pw_again" name="new_pw_again"/>
+			</div>
+		</div>
+		<div class="buttons">
+			<input type="submit" value="确定" class="button" />
+		</div>
+	</form>
+</div>
+</%def>
